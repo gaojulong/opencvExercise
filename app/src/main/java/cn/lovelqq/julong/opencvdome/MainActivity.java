@@ -11,10 +11,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
     static {
         if(!OpenCVLoader.initDebug()){
-            Log.e(TAG,"OpenCV not loaded");
+            Log.d(TAG,"OpenCV not loaded");
         }
         else {
-            Log.e(TAG,"OpenCV loaded");
+            Log.d(TAG,"OpenCV loaded");
         }
     }
 
