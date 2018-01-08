@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.lovelqq.julong.opencvdome.CardOCRActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_reco"
+            android:text="点击识别"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_jieguo"
+            android:textSize="35dp"
+            android:hint="识别的结果"
+            android:layout_toRightOf="@+id/bt_reco"
+            />
+        <Button
+            android:id="@+id/bt_matNegation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_jieguo"
+            android:layout_marginLeft="0dp"
+            android:text="Mat像素取反"/>
+        <Button
+            android:id="@+id/bt_bitmapNegation"
+            android:layout_toRightOf="@id/bt_matNegation"
+            android:layout_below="@id/tv_jieguo"
+            android:text="Bitmap像素取反"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/bt_gray"
+            android:layout_below="@id/tv_jieguo"
+            android:layout_toRightOf="@id/bt_bitmapNegation"
+            android:text="灰度处理"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:src="@drawable/i464"
+            android:layout_below="@id/bt_matNegation"
+
+            />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
