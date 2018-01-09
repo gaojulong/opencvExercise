@@ -15,8 +15,8 @@ import Operation.Negation;
 
 public class CardOCRActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //
-    private Button bt_rec,bt_MatNegation,bt_BitmapNegation,bt_gray;
+    //5
+    private Button bt_rec,bt_MatNegation,bt_BitmapNegation,bt_gray,bt_Mat_bit;
     private TextView tv_content;//识别结果显示
     private ImageView imageView;//图片显示
     private Uri fileUri;
@@ -43,6 +43,7 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
         bt_BitmapNegation=findViewById(R.id.bt_bitmapNegation);
         bt_MatNegation=findViewById(R.id.bt_matNegation);
         bt_gray=findViewById(R.id.bt_gray);
+        bt_Mat_bit=findViewById(R.id.bt_mat_bitNegation);
 
 
         tv_content=findViewById(R.id.tv_jieguo);
@@ -52,6 +53,7 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
         bt_BitmapNegation.setOnClickListener(this);
         bt_MatNegation.setOnClickListener(this);
         bt_gray.setOnClickListener(this);
+        bt_Mat_bit.setOnClickListener(this);
 
     }
 
@@ -86,16 +88,19 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(this.getApplication(),"识别按钮被点击",Toast.LENGTH_SHORT).show();
 
                 break;
-            case R.id.bt_gray:
+            case R.id.bt_gray://灰度处理
                 bitmap=Negation.Gray(mainbitmap);
                 imageView.setImageBitmap(bitmap);
                 break;
-            case  R.id.bt_bitmapNegation:
+            case  R.id.bt_bitmapNegation://对bitmap像素取反
                 bitmap= Negation.bitmapNegation(mainbitmap,getApplication());
                 imageView.setImageBitmap(bitmap);
                 break;
-            case R.id.bt_matNegation:
+            case R.id.bt_matNegation://对src像素点取反，速度最慢
                 bitmap= Negation.matNegation(mainbitmap,getApplication());
+                imageView.setImageBitmap(bitmap);
+            case R.id.bt_mat_bitNegation://使用OpenCV提供的速度最快
+                bitmap=Negation.bitNedation(mainbitmap,getApplication());
                 imageView.setImageBitmap(bitmap);
                 break;
 
