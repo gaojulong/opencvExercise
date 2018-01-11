@@ -30,6 +30,8 @@ public class Negation {
         Imgproc.cvtColor(src,gray,Imgproc.COLOR_BGRA2GRAY);
 
         Utils.matToBitmap(gray,bitmap);
+        src.release();
+        gray.release();
         return bitmap;
     }
 
@@ -49,6 +51,7 @@ public class Negation {
         long time =System.currentTimeMillis()-starttime;
         Toast.makeText(context,"耗时:"+time+"毫秒",Toast.LENGTH_SHORT).show();
         Utils.matToBitmap(src,bitmap);
+        src.release();
         return bitmap;
     }
     /**
@@ -89,6 +92,8 @@ public class Negation {
         bitmap.setPixels(pixels,0,width,0,0,width,height);
         return bitmap;
     }
+
+
     /**
      * 把bitmap转换成Mat类型src
      * src进行灰度处理后赋给gray
@@ -146,7 +151,6 @@ public class Negation {
         long time=System.currentTimeMillis()-starttime;
         Toast.makeText(context,"耗时:"+time+"毫秒",Toast.LENGTH_SHORT).show();
         Utils.matToBitmap(src, bitmap);
-        src.release();
         src.release();
         return bitmap;
     }
