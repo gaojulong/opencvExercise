@@ -26,6 +26,12 @@ public class CopyUtils {
         bp.setPixels(pixels,0,width,0,0,width,height);
         return bp;
     }
+
+    /**
+     *
+     * @param bitmap
+     * @return
+     */
     public static Bitmap copyMatBitmap(Bitmap bitmap){
         Mat src=new Mat();
         Utils.bitmapToMat(bitmap,src);

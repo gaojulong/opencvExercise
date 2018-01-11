@@ -3,6 +3,7 @@ package Operation;
 import android.graphics.Bitmap;
 
 import org.opencv.android.Utils;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;
@@ -43,6 +44,25 @@ public class Blurclass {
 
         Imgproc.GaussianBlur(src,dst,new Size(5,5),0,0,4);
         Utils.matToBitmap(dst,bitmap);
+        src.release();
+        dst.release();
+        return bitmap;
+    }
+    public static Bitmap biBlur(Bitmap bitmap){
+        Mat src=new Mat();
+        Utils.bitmapToMat(bitmap,src);
+        //转为三通道的，否则程序将会报错
+        Imgproc.cvtColor(src,src,Imgproc.COLOR_BGRA2BGR);
+        Mat dst = new Mat();
+        //双边模糊
+        Imgproc.bilateralFilter(src,dst,15,150,15,4);
+        Utils.matToBitmap(dst,bitmap);
+        //锐化
+        Mat kernel=new Mat(5,5, CvType.CV_16S);
+        kernel.put(0,0,0,-1,0,-1,5,-1,0,-1,0);
+        Imgproc.filter2D(dst,dst,-1,kernel,new Point(-1,-1),0.0,4);
+        //清除
+        kernel.release();
         src.release();
         dst.release();
         return bitmap;

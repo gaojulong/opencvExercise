@@ -5,28 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cn.lovelqq.julong.opencvdome.CardOCRActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/bt_reco"
-            android:text="点击识别"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="点击识别"/>
+
+        <TextView
             android:id="@+id/tv_jieguo"
-            android:hint="识别的结果"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/bt_reco"
+            android:hint="识别的结果"
             />
+
         <Button
             android:id="@+id/bt_resBitmap"
-            android:text="复位bitma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_jieguo"/>
+            android:layout_toRightOf="@id/tv_jieguo"
+            android:text="复位bitma"/>
+
         <Button
             android:id="@+id/bt_matNegation"
             android:layout_width="wrap_content"
@@ -34,41 +40,53 @@
             android:layout_below="@id/bt_reco"
             android:layout_marginLeft="0dp"
             android:text="Mat像素取反"/>
+
         <Button
             android:id="@+id/bt_bitmapNegation"
-            android:layout_toRightOf="@id/bt_matNegation"
-            android:layout_below="@id/bt_reco"
-            android:text="Bitmap像素取反"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bt_reco"
+            android:layout_toRightOf="@id/bt_matNegation"
+            android:text="Bitmap像素取反"/>
+
         <Button
             android:id="@+id/bt_mat_bitNegation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/bt_reco"
             android:layout_toRightOf="@id/bt_bitmapNegation"
-            android:text="MatC++取反(推)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="MatC++取反(推)"/>
+
         <LinearLayout
             android:id="@+id/line1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/bt_mat_bitNegation"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/bt_gray"
-                android:text="灰度处理"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="灰度处理"/>
+
             <Button
                 android:id="@+id/bt_meanBlur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="均值模糊"/>
+
             <Button
                 android:id="@+id/bt_GaussBlur"
-                android:text="高斯模糊"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="高斯模糊"/>
+
+            <Button
+                android:id="@+id/bt_biBlur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="双边模糊and锐化"/>
         </LinearLayout>
 
 
@@ -76,8 +94,8 @@
             android:id="@+id/image_view"
             android:layout_width="wrap_content"
             android:layout_height="300dp"
+            android:layout_below="@id/line1"
             android:src="@drawable/i464"
-           android:layout_below="@id/line1"
             />
     </RelativeLayout>
 

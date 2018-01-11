@@ -1,5 +1,6 @@
 package cn.lovelqq.julong.opencvdome;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,7 +20,7 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
 
     //5
     private Button bt_rec,bt_MatNegation,bt_BitmapNegation,bt_gray,bt_Mat_bit;
-    private Button bt_meanBlur,bt_GaussBlur;
+    private Button bt_meanBlur,bt_GaussBlur,bt_biBlur;//模糊
     private Button bt_recBitmap;//恢复图片
     private TextView tv_content;//识别结果显示
     private ImageView imageView;//图片显示
@@ -30,6 +31,8 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //强制竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_card_ocr);
         init();
         bitmap=getBitmap();
@@ -55,6 +58,7 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
         bt_GaussBlur=findViewById(R.id.bt_GaussBlur);
         bt_meanBlur=findViewById(R.id.bt_meanBlur);
         bt_recBitmap=findViewById(R.id.bt_resBitmap);
+        bt_biBlur=findViewById(R.id.bt_biBlur);
 
 
         tv_content=findViewById(R.id.tv_jieguo);
@@ -68,6 +72,7 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
         bt_GaussBlur.setOnClickListener(this);
         bt_meanBlur.setOnClickListener(this);
         bt_recBitmap.setOnClickListener(this);
+        bt_biBlur.setOnClickListener(this);
 
     }
 
@@ -126,6 +131,10 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.bt_GaussBlur://高斯模糊
                 bitmap=Blurclass.gaussBlur(bitmap);
+                imageView.setImageBitmap(bitmap);
+                break;
+            case R.id.bt_biBlur://双边模糊and锐化
+                bitmap=Blurclass.biBlur(bitmap);
                 imageView.setImageBitmap(bitmap);
                 break;
 
