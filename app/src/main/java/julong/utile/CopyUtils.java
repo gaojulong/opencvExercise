@@ -11,7 +11,7 @@ import org.opencv.core.Mat;
 
 public class CopyUtils {
     /**
-     * 不适合mat操作，还未找到原因
+     * 复制后不适合mat操作（还未找到原因）
      * copy Bitmap
      */
     public static Bitmap copyBitmap(Bitmap bitmap){
