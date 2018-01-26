@@ -8,9 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/bt_reco"
@@ -88,13 +86,62 @@
                 android:layout_height="wrap_content"
                 android:text="双边模糊and锐化"/>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_erod"
+                android:text="膨胀"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/bt_dilate"
+                android:text="腐蚀"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/bt_open"
+                android:text="开操作"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/bt_close"
+                android:text="闭操作"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/line2"
+            android:id="@+id/line3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <SeekBar
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:max="255"
+                android:progress="0"
+                android:secondaryProgress="127"
+                android:id="@+id/sk_SeekBar"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="seekbar的值"
+                android:id="@+id/tv_seekbar"/>
+        </LinearLayout>
 
 
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="wrap_content"
             android:layout_height="300dp"
-            android:layout_below="@id/line1"
+            android:layout_below="@id/line3"
             android:src="@drawable/i464"
             />
     </RelativeLayout>

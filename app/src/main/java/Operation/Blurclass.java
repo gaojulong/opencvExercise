@@ -48,14 +48,20 @@ public class Blurclass {
         dst.release();
         return bitmap;
     }
-    public static Bitmap biBlur(Bitmap bitmap){
+
+    /**
+     * 双边模糊
+     * @param bitmap
+     * @return
+     */
+    public static Bitmap biBlur(Bitmap bitmap,int i){
         Mat src=new Mat();
         Utils.bitmapToMat(bitmap,src);
         //转为三通道的，否则程序将会报错
         Imgproc.cvtColor(src,src,Imgproc.COLOR_BGRA2BGR);
         Mat dst = new Mat();
         //双边模糊
-        Imgproc.bilateralFilter(src,dst,15,150,15,4);
+        Imgproc.bilateralFilter(src,dst,15,i,15,4);
         Utils.matToBitmap(dst,bitmap);
         //锐化
         Mat kernel=new Mat(5,5, CvType.CV_16S);
