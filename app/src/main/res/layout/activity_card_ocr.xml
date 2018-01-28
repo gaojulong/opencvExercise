@@ -114,10 +114,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-
         <LinearLayout
-            android:layout_below="@id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:id="@+id/line3"
+            android:layout_below="@id/line2">
+            <Button
+                android:id="@+id/bt_threhold"
+                android:text="二值化图形"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/line3"
+            android:id="@+id/line4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -141,7 +152,7 @@
             android:id="@+id/image_view"
             android:layout_width="wrap_content"
             android:layout_height="300dp"
-            android:layout_below="@id/line3"
+            android:layout_below="@id/line4"
             android:src="@drawable/i464"
             />
     </RelativeLayout>

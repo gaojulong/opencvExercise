@@ -1,11 +1,14 @@
 package cn.lovelqq.julong.opencvdome;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import Operation.Blurclass;
 import Operation.EDOpenColse;
 import Operation.Negation;
+import Operation.ThreholdImag;
 import julong.utile.CopyUtils;
 import julong.utile.Dialog;
 
@@ -27,12 +31,13 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
     private Button bt_meanBlur,bt_GaussBlur,bt_biBlur;//模糊
     private Button bt_recBitmap;//恢复图片
     private Button bt_dilate,bt_erod,bt_open,bt_close;//膨胀和模糊
+    private Button bt_threhold;//二值化
     private TextView tv_content,tv_SeekBar;//识别结果显示
     private SeekBar seekBar;
     private ImageView imageView;//图片显示
     private Uri fileUri;
     private Bitmap bitmap;
-    private static String seekBarFalg="";
+    public static String seekBarFalg="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,7 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
         bt_close=findViewById(R.id.bt_close);
         seekBar=findViewById(R.id.sk_SeekBar);
         tv_SeekBar=findViewById(R.id.tv_seekbar);
+        bt_threhold=findViewById(R.id.bt_threhold);
 
 
         tv_content=findViewById(R.id.tv_jieguo);
@@ -95,6 +101,7 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
         bt_dilate.setOnClickListener(this);
         bt_open.setOnClickListener(this);
         bt_close.setOnClickListener(this);
+        bt_threhold.setOnClickListener(this);
     }
 
     /**
@@ -157,8 +164,6 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.bt_biBlur://双边模糊and锐化
                 seekBarFalg="biBlur";
                 Toast.makeText(CardOCRActivity.this,"拖动seekbar调节模糊度",Toast.LENGTH_SHORT).show();
-//                bitmap=Blurclass.biBlur(bitmap);
-//                imageView.setImageBitmap(bitmap);
                 break;
             case R.id.bt_erod://膨胀
                 bitmap= EDOpenColse.erodOrDilate("erod",bitmap);
@@ -176,6 +181,28 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
                 bitmap=EDOpenColse.openOrClose("close",bitmap);
                 imageView.setImageBitmap(bitmap);
                 break;
+            case R.id.bt_threhold:
+
+                AlertDialog.Builder infrare_builder = new AlertDialog.Builder(CardOCRActivity.this);
+                infrare_builder.setTitle("二值化");
+                String[] infrare_item = { "全局阈值二值化", "局部阈值二值化" };
+                infrare_builder.setSingleChoiceItems(infrare_item, -1,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == 0) {// 报警
+                                    seekBarFalg="threhold";
+                                    Toast.makeText(CardOCRActivity.this,"拖动seekbar调节模糊度",Toast.LENGTH_SHORT).show();
+                                } else if (which == 1) {// 图片
+                                    //pictureController();
+                                    Toast.makeText(CardOCRActivity.this,"图pain",Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.cancel();
+                            }
+                        });
+                infrare_builder.create().show();
+//
+                break;
 
         }
 
@@ -186,12 +213,18 @@ public class CardOCRActivity extends AppCompatActivity implements View.OnClickLi
         int Value=seekBar.getProgress();
         tv_SeekBar.setText(Value+"");
         if ("".equals(seekBarFalg)){
-            Dialog.ShowDialog(this);
-           // Toast.makeText(CardOCRActivity.this,"请选择功能后拖动seekbar",Toast.LENGTH_SHORT).show();
+            Dialog.seekbar_ShowDialog(this);
+            seekBarFalg="跳出，防止无限调用Dialog";
         }else if ("biBlur".equals(seekBarFalg)){
             //双边模糊加锐化
             bitmap=getBitmap();
             bitmap=Blurclass.biBlur(bitmap,Value);
+            imageView.setImageBitmap(bitmap);
+
+        }else if ("threhold".equals(seekBarFalg)){
+            //双边模糊加锐化
+            bitmap=getBitmap();
+            bitmap= ThreholdImag.threhold(bitmap,Value);
             imageView.setImageBitmap(bitmap);
 
         }
